@@ -8,5 +8,10 @@ export default (config: UserConfig) => {
         '@': '/src',
       },
     },
+    server: {
+      allowedHosts: [
+        "elguide.buybuy.kg"
+      ]
+    },
   });
 };
