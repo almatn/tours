@@ -39,4 +39,4 @@ services:
     depends_on:
       - strapi
 volumes:
-  pgdata:
+  pgdatastrapi:
