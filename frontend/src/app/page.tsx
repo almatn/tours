@@ -9,6 +9,11 @@ import Media from "@/app/components/Media";
 
 export default async function HomePage() {
   const page = await getLandingPage()
+
+  if (!page) {
+    return <div>Failed to load page</div>
+  }
+
   const hero = page.sections.find(
     (s): s is HeroSection => s.__component === 'sections.hero'
   )
