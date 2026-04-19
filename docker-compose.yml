@@ -7,9 +7,6 @@ services:
       - strapi-db
     env_file:
       - .env.production
-    volumes:
-      - ./strapi:/app
-      - /app/node_modules
     networks:
       - buybuy_default
 
