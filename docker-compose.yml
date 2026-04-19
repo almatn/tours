@@ -1,6 +1,6 @@
 services:
   strapi:
-    container_name: strapiBackend
+    container_name: strapi
     build: ./strapi
     ports:
       - "1337:1337"
@@ -11,17 +11,19 @@ services:
     volumes:
       - ./strapi:/app
       - /app/node_modules
+    networks:
+      - buybuy_default
 
-  db:
-    container_name: strapiDB
+  strapiDB:
     image: postgres:16-bookworm
     env_file:
       - .env.production
     volumes:
       - pgdatastrapi:/var/lib/postgresql/data
+    networks:
+      - buybuy_default
 
-  frontend:
-    container_name: strapiFrontend
+  strapiFrontend:
     ports:
       - "3100:3100"
     build:
@@ -38,5 +40,12 @@ services:
       - ./frontend/tailwind.config.ts:/frontend/tailwind.config.ts
     depends_on:
       - strapi
+    networks:
+      - buybuy_default
+
 volumes:
   pgdatastrapi:
+
+networks:
+  buybuy_default:
+    external: true
