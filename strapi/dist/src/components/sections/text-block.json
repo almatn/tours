@@ -1,0 +1,16 @@
+{
+    "collectionName": "components_sections_text_blocks",
+    "info": {
+        "displayName": "text-block"
+    },
+    "options": {},
+    "attributes": {
+        "content": {
+            "type": "text"
+        },
+        "alignment": {
+            "type": "string"
+        }
+    },
+    "config": {}
+}

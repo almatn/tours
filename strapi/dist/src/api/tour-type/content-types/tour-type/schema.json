@@ -1,0 +1,28 @@
+{
+    "kind": "collectionType",
+    "collectionName": "tour_types",
+    "info": {
+        "singularName": "tour-type",
+        "pluralName": "tour-types",
+        "displayName": "Tour Type"
+    },
+    "options": {
+        "draftAndPublish": true
+    },
+    "pluginOptions": {},
+    "attributes": {
+        "name": {
+            "type": "string"
+        },
+        "slug": {
+            "type": "uid",
+            "targetField": "name"
+        },
+        "tours": {
+            "type": "relation",
+            "relation": "manyToMany",
+            "target": "api::tour.tour",
+            "mappedBy": "tour_types"
+        }
+    }
+}

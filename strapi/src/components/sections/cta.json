@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_sections_ctas",
+  "info": {
+    "displayName": "cta"
+  },
+  "options": {},
+  "attributes": {
+    "heading": {
+      "type": "string"
+    },
+    "body": {
+      "type": "text"
+    },
+    "primaryLabel": {
+      "type": "string"
+    },
+    "primaryUrl": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_sections_media",
+  "info": {
+    "displayName": "media"
+  },
+  "options": {},
+  "attributes": {
+    "media": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "caption": {
+      "type": "string"
+    },
+    "fullWidth": {
+      "type": "boolean"
+    }
+  },
+  "config": {}
+}
