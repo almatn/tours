@@ -85,6 +85,7 @@ export type Section =
   | TextBlock
   | CTASection
     | ReviewStrip
+    | Media
 
 
 // =========================
@@ -96,14 +97,10 @@ export interface LandingPage {
   sections: Section[]
 }
 
-export interface Media {
-  url: string;
-  alternativeText?: string;
-}
-
-export interface MediaSection {
-  id: number;
-  __component: "sections.media";
-  title: string;
-  media: Media;
+export type Media = {
+  __component: 'sections.media'
+  id: number
+  media: StrapiImage[]
+  caption?: string
+  fullWidth: boolean
 }

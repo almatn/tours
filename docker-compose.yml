@@ -1,6 +1,6 @@
 services:
   strapi:
-    container_name: strapi
+    container_name: strapiBackend
     build: ./strapi
     ports:
       - "1337:1337"

@@ -10,6 +10,9 @@ const dummyReviews: Review[] = [
   { id: 1, name: 'Alex', text: 'Absolutely stunning experience.' },
   { id: 2, name: 'Maria', text: 'Best trip of my life.' },
   { id: 3, name: 'John', text: 'Unreal landscapes and culture.' },
+      { id: 4, name: 'Lex', text: 'Stunning.' },
+  { id: 5, name: 'Omniman', text: 'Wow.' },
+  { id: 6, name: 'Mark', text: 'Highly recommend.' },
 ]
 
 export default function ReviewsStrip() {
@@ -18,7 +21,7 @@ export default function ReviewsStrip() {
       <div className="flex gap-12 animate-scroll whitespace-nowrap px-6">
         {dummyReviews.map((r) => (
           <div key={r.id} className="min-w-[300px]">
-            <p className="text-white/80 italic">${r.text}</p>
+            <p className="text-white/80 italic">{r.text}</p>
             <p className="text-white/50 text-sm mt-2">— {r.name}</p>
           </div>
         ))}
