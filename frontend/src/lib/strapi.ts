@@ -2,7 +2,7 @@ import {StrapiImage} from "@/types/strapi";
 import {Tour} from "@/types/tour";
 
 const STRAPI_URL =
-  process.env.NEXT_PUBLIC_API_BASE_URL
+  process.env.NEXT_PUBLIC_API_BASE_URL || 'https://elguide.buybuy.kg/api/'
 
 async function fetchAPI(path: string) {
   try {
