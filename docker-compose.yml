@@ -1,11 +1,10 @@
 services:
   strapi:
-    container_name: strapi
     build: ./strapi
     ports:
       - "1337:1337"
     depends_on:
-      - db
+      - strapiDB
     env_file:
       - .env.production
     volumes:
