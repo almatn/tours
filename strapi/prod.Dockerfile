@@ -4,34 +4,28 @@ RUN apk update && apk add --no-cache build-base gcc autoconf automake zlib-dev l
 ARG NODE_ENV=production
 ENV NODE_ENV=${NODE_ENV}
 
-WORKDIR /opt/
+WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm install -g node-gyp
-RUN npm config set fetch-retry-maxtimeout 600000 -g && npm ci
+RUN npm ci
 
-ENV PATH=/opt/node_modules/.bin:$PATH
-
-WORKDIR /opt/app
 COPY . .
 
 RUN npm run build
-
-# OPTIONAL: reduce size
 RUN npm prune --production
 
 
 FROM node:22-alpine
+
 RUN apk add --no-cache vips-dev
 ARG NODE_ENV=production
 ENV NODE_ENV=${NODE_ENV}
-WORKDIR /opt/app
 
-COPY --from=build /opt/node_modules ./node_modules
-COPY --from=build /opt/app ./
+WORKDIR /app
 
-ENV PATH=/opt/node_modules/.bin:$PATH
+COPY --from=build /app ./
 
-RUN chown -R node:node /opt/app
+RUN chown -R node:node /app
 USER node
 
 EXPOSE 1337
