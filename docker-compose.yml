@@ -7,7 +7,7 @@ services:
     depends_on:
       - db
     env_file:
-      - .env.local
+      - .env.production
     volumes:
       - ./strapi:/app
       - /app/node_modules
@@ -16,7 +16,7 @@ services:
     container_name: strapiDB
     image: postgres:16-bookworm
     env_file:
-      - .env.local
+      - .env.production
     volumes:
       - pgdatastrapi:/var/lib/postgresql/data
 
@@ -28,7 +28,7 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
     env_file:
-      - .env.local
+      - .env.production
     volumes:
       - ./frontend/src:/frontend/src
       - ./frontend/public:/frontend/public
