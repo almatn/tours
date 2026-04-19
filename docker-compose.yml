@@ -2,7 +2,7 @@ services:
   strapi:
     build:
       context: ./strapi
-      dockerfile: Dockerfile
+      dockerfile: prod.Dockerfile
     ports:
       - "1337:1337"
     depends_on:
