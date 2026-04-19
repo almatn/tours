@@ -1,0 +1,42 @@
+services:
+  strapi:
+    container_name: strapi
+    build: ./strapi
+    ports:
+      - "1337:1337"
+    depends_on:
+      - db
+    env_file:
+      - .env.local
+    volumes:
+      - ./strapi:/app
+      - /app/node_modules
+
+  db:
+    container_name: strapiDB
+    image: postgres:16-bookworm
+    env_file:
+      - .env.local
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  frontend:
+    container_name: strapiFrontend
+    ports:
+      - "3000:3000"
+    build:
+      context: frontend
+      dockerfile: dev.Dockerfile
+    env_file:
+      - .env.local
+    volumes:
+      - ./frontend/src:/frontend/src
+      - ./frontend/public:/frontend/public
+      - ./frontend/postcss.config.js:/frontend/postcss.config.js
+      - ./frontend/postcss.config.mjs:/frontend/postcss.config.mjs
+      - ./frontend/tailwind.config.js:/frontend/tailwind.config.js
+      - ./frontend/tailwind.config.ts:/frontend/tailwind.config.ts
+    depends_on:
+      - strapi
+volumes:
+  pgdata:
