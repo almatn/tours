@@ -28,7 +28,7 @@ const config = ({ env }) => {
         postgres: {
             connection: {
                 connectionString: env('DATABASE_URL'),
-                host: env('DATABASE_HOST', 'localhost'),
+                host: env('DATABASE_HOST', 'strapi-db'),
                 port: env.int('DATABASE_PORT', 5432),
                 database: env('DATABASE_NAME', 'strapi'),
                 user: env('DATABASE_USERNAME', 'strapi'),
