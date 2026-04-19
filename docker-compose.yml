@@ -4,7 +4,7 @@ services:
     ports:
       - "1337:1337"
     depends_on:
-      - strapiDB
+      - strapi-db
     env_file:
       - .env.production
     volumes:
@@ -13,7 +13,7 @@ services:
     networks:
       - buybuy_default
 
-  strapiDB:
+  strapi-db:
     image: postgres:16-bookworm
     env_file:
       - .env.production
@@ -22,7 +22,7 @@ services:
     networks:
       - buybuy_default
 
-  strapiFrontend:
+  strapi-frontend:
     ports:
       - "3100:3100"
     build:
