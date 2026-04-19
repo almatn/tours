@@ -60,16 +60,11 @@ export async function getLandingPage() {
   }
 }
 
-export function getStrapiImageUrl(img?: StrapiImage) {
-  try {
-    if (!img?.url) return ""
-  if (img.url.startsWith('http')) return img.url
+export function getStrapiImageUrl(img?: StrapiImage): string {
+  if (!img?.url) return ""
+  if (img.url.startsWith("http")) return img.url
   return `http://localhost:1337${img.url}`
-  } catch (e) {
-    console.error('Error constructing image URL:', e)
-  }
 }
-
 
 export interface TourFilters {
   types?: string[]
