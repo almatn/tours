@@ -2,27 +2,43 @@ import {StrapiImage} from "@/types/strapi";
 import {Tour} from "@/types/tour";
 
 const STRAPI_URL =
-  process.env.NEXT_PUBLIC_STRAPI_URL || 'http://strapi:1337'
+  process.env.NEXT_PUBLIC_API_BASE_URL
 
 async function fetchAPI(path: string) {
-  const res = await fetch(`${STRAPI_URL}${path}`, {
-  })
+  try {
+    const res = await fetch(`${STRAPI_URL}${path}`)
 
-  if (!res.ok) {
-    console.error(await res.text())
-    throw new Error('Failed to fetch API')
+    if (!res.ok) {
+      console.error(await res.text())
+      return null
+    }
+
+    return await res.json()
+  } catch (e) {
+    console.error('Fetch failed (likely build time):', e)
+    return null
   }
-
-  return res.json()
 }
 
 export async function getGlobal() {
-  const json = await fetchAPI(
-    '/api/global?populate[navbar][populate][links]=*'
-  )
-  console.log('Strapi global data:', json.data)
-  if (!json.data) {
+  try {
+    const json = await fetchAPI(
+      '/api/global?populate[navbar][populate][links]=*'
+    )
 
+    if (!json?.data) {
+      return {
+        navbar: {
+          links: [],
+          ctaLabel: '',
+          ctaUrl: '',
+        },
+      }
+    }
+
+    return json.data
+  } catch (e) {
+    console.error('Error fetching global:', e)
     return {
       navbar: {
         links: [],
@@ -31,29 +47,27 @@ export async function getGlobal() {
       },
     }
   }
-
-  return json.data
 }
 
 export async function getLandingPage() {
+  try {
   const json = await fetchAPI('/api/landing-page?populate[sections][populate]=*')
   console.log('Strapi landing page data:', json.data)
-
   return json.data as import('@/types/strapi').LandingPage
-}
-
-export function getStrapiMedia(url?: string) {
-  if (!url) return null
-
-  if (url.startsWith('http')) return url
-
-  return `${process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337'}${url}`
+  } catch (e) {
+    console.error('Error fetching landing page:', e)
+    return null
+  }
 }
 
 export function getStrapiImageUrl(img?: StrapiImage) {
-  if (!img?.url) return ""
+  try {
+    if (!img?.url) return ""
   if (img.url.startsWith('http')) return img.url
   return `http://localhost:1337${img.url}`
+  } catch (e) {
+    console.error('Error constructing image URL:', e)
+  }
 }
 
 
@@ -67,7 +81,8 @@ export interface TourFilters {
 export async function getTours(
   filters?: TourFilters
 ): Promise<Tour[]> {
-  const query = new URLSearchParams()
+  try {
+     const query = new URLSearchParams()
 
   query.append("populate", "*")
 
@@ -92,10 +107,19 @@ export async function getTours(
   const json = await fetchAPI(`/api/tours?${query.toString()}`)
 
   return json.data ?? []
+  } catch (e) {
+    console.error('Error fetching tours:', e)
+    return []
+  }
 }
 
 export async function getTourTypes() {
-  const json = await fetchAPI(`/api/tour-types`)
+  try {
+    const json = await fetchAPI(`/api/tour-types`)
 
   return json.data ?? []
+  } catch (e) {
+    console.error('Error fetching tour types:', e)
+    return []
+  }
 }
