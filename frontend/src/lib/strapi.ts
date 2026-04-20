@@ -2,7 +2,7 @@ import {StrapiImage} from "@/types/strapi";
 import {Tour} from "@/types/tour";
 
 const STRAPI_URL =
-  process.env.NEXT_PUBLIC_API_BASE_URL || 'https://elguide.buybuy.kg/api/'
+  process.env.NEXT_PUBLIC_API_BASE_URL || 'https://elguide.buybuy.kg/strapi'
 
 async function fetchAPI(path: string) {
   try {
@@ -52,7 +52,6 @@ export async function getGlobal() {
 export async function getLandingPage() {
   try {
   const json = await fetchAPI('/api/landing-page?populate[sections][populate]=*')
-  console.log('Strapi landing page data:', json.data)
   return json.data as import('@/types/strapi').LandingPage
   } catch (e) {
     console.error('Error fetching landing page:', e)
