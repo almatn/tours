@@ -1,8 +1,6 @@
 services:
   strapi:
-    build:
-      context: ./strapi
-      dockerfile: prod.Dockerfile
+    image: ghcr.io/almatn/tours-strapi:latest
     ports:
       - "1337:1337"
     depends_on:
@@ -22,25 +20,16 @@ services:
       - buybuy_default
 
   strapi-frontend:
+    image: ghcr.io/almatn/tours-frontend:latest
     ports:
       - "3100:3100"
-    build:
-      context: ./frontend
-      dockerfile: frontend/prod.Dockerfile
     env_file:
       - .env.production
-    volumes:
-      - ./frontend/src:/frontend/src
-      - ./frontend/public:/frontend/public
-      - ./frontend/postcss.config.js:/frontend/postcss.config.js
-      - ./frontend/postcss.config.mjs:/frontend/postcss.config.mjs
-      - ./frontend/tailwind.config.js:/frontend/tailwind.config.js
-      - ./frontend/tailwind.config.ts:/frontend/tailwind.config.ts
     depends_on:
       - strapi
     networks:
       - buybuy_default
-
+    
 volumes:
   pgdatastrapi:
 
