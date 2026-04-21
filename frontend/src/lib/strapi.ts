@@ -62,7 +62,7 @@ export async function getLandingPage() {
 export function getStrapiImageUrl(img?: StrapiImage): string {
   if (!img?.url) return ""
   if (img.url.startsWith("http")) return img.url
-  return `http://localhost:1337${img.url}`
+  return `${STRAPI_URL}${img.url}`
 }
 
 export interface TourFilters {
