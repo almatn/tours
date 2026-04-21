@@ -10,6 +10,17 @@ const nextConfig: NextConfig = {
         hostname: 'elguide.buybuy.kg',
         pathname: '/strapi/uploads/**',
       },
+        {
+        protocol: 'http',
+        hostname: 'strapi',
+        port: '1337',
+        pathname: '/uploads/**',
+      },        {
+        protocol: 'http',
+        hostname: 'strapi',
+        port: '1337',
+        pathname: '/strapi/uploads/**',
+      },
     ],
   },
 };
