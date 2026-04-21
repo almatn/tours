@@ -1,13 +1,14 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 
 interface Props {
   heading: string
   subheading?: string
   ctaLabel?: string
   ctaUrl?: string
-  backgroundImage: string
+  backgroundImage?: string
 }
 
 export default function Hero({
@@ -18,15 +19,18 @@ export default function Hero({
   backgroundImage,
 }: Props) {
   return (
-    <section className="relative h-screen flex items-center justify-center text-center text-white">
+    <section className="relative h-screen flex items-center justify-center text-center text-white overflow-hidden">
 
       {/* Background image */}
-      <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{
-          backgroundImage: `url(${backgroundImage || '/fallback.jpg'})`,
-        }}
-      />
+      {backgroundImage && (
+        <Image
+          src={backgroundImage}
+          alt={heading}
+          fill
+          priority
+          className="object-cover"
+        />
+      )}
 
       {/* Overlay */}
       <div className="absolute inset-0 bg-black/60" />
