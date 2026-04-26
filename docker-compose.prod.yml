@@ -1,14 +1,14 @@
 services:
   strapi:
     image: ghcr.io/almatn/tours-strapi:latest
-    ports:
-      - "1337:1337"
     depends_on:
       - strapi-db
     env_file:
       - .env.production
     networks:
       - buybuy_default
+    volumes:
+      - media_strapi:/app/public/uploads
 
   strapi-db:
     image: postgres:16-bookworm
@@ -21,8 +21,6 @@ services:
 
   strapi-frontend:
     image: ghcr.io/almatn/tours-frontend:latest
-    ports:
-      - "3100:3100"
     env_file:
       - .env.production
     depends_on:
@@ -32,6 +30,7 @@ services:
     
 volumes:
   pgdatastrapi:
+  media_strapi:
 
 networks:
   buybuy_default:
