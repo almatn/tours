@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const config = ({ env }) => ({
     host: env('HOST', '0.0.0.0'),
     port: env.int('PORT', 1337),
-    url: env('PUBLIC_URL', 'https://elguide.buybuy.kg/strapi'),
+    url: env('PUBLIC_URL'),
     app: {
         keys: env.array('APP_KEYS'),
     },

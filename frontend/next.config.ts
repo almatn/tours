@@ -10,14 +10,21 @@ const nextConfig: NextConfig = {
         hostname: 'elguide.buybuy.kg',
         pathname: '/uploads/**',
       },
-        {
-        protocol: 'http',
-        hostname: 'strapi',
-        port: '1337',
-        pathname: '/uploads/**',
+      {
+          protocol: 'http',
+          hostname: 'localhost',
+          pathname: '/uploads/**',
       },
     ],
-  },
+    },
+    async rewrites() {
+        return [
+            {
+                source: '/uploads/:path*',
+                destination: 'http://nginxxx/uploads/:path*',
+            },
+        ];
+    },
 };
 
 export default nextConfig;
