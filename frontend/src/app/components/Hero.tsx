@@ -23,13 +23,19 @@ export default function Hero({
 
       {/* Background image */}
       {backgroundImage && (
-        <Image
-          src={backgroundImage}
-          alt={heading}
-          fill
-          priority
-          className="object-cover"
-        />
+          <><Image
+              src={backgroundImage}
+              alt={heading}
+              fill
+              priority
+              className="object-cover"
+              unoptimized/>
+            <Image
+              src={backgroundImage}
+              alt={heading}
+              fill
+              priority
+              className="object-cover"/></>
       )}
 
       {/* Overlay */}
