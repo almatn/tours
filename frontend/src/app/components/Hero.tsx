@@ -29,7 +29,6 @@ export default function Hero({
           fill
           priority
           className="object-cover"
-          unoptimized
         />
       )}
 
