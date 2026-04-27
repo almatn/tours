@@ -1,9 +1,11 @@
 import {StrapiImage} from "@/types/strapi";
 import {Tour} from "@/types/tour";
 
+const strapi = process.env.STRAPI_INTERNAL_URL || 'http://strapi:1337';
+
 async function fetchAPI(path: string) {
   try {
-    const res = await fetch(`${process.env.STRAPI_INTERNAL_URL}${path}`, {
+    const res = await fetch(`${strapi}${path}`, {
   })
 
     if (!res.ok) {
