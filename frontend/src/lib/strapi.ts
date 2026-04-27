@@ -1,7 +1,7 @@
 import {StrapiImage} from "@/types/strapi";
 import {Tour} from "@/types/tour";
 
-const strapi = process.env.STRAPI_INTERNAL_URL || 'http://strapi:1337';
+const strapi = process.env.STRAPI_INTERNAL_URL || 'https://elguide.buybuy.kg/strapi';
 
 async function fetchAPI(path: string) {
   try {
