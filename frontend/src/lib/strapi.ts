@@ -1,12 +1,10 @@
 import {StrapiImage} from "@/types/strapi";
 import {Tour} from "@/types/tour";
 
-const STRAPI_URL =
-  process.env.NEXT_PUBLIC_API_BASE_URL || 'https://elguide.buybuy.kg/strapi'
-
 async function fetchAPI(path: string) {
   try {
-    const res = await fetch(`${STRAPI_URL}${path}`)
+    const res = await fetch(`${process.env.STRAPI_INTERNAL_URL}${path}`, {
+  })
 
     if (!res.ok) {
       console.error(await res.text())

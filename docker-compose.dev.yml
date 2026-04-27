@@ -1,0 +1,47 @@
+services:
+  strapi-db:
+    image: postgres:16-bookworm
+    env_file:
+      - .env.local
+    volumes:
+      - pgdatastrapi:/var/lib/postgresql/data
+
+  strapi:
+    build:
+      context: ./strapi
+      dockerfile: dev.Dockerfile
+    ports:
+      - "1337:1337"
+    env_file:
+      - strapi/.env
+    volumes:
+      - media_strapi:/app/public/uploads
+    depends_on:
+      - strapi-db
+
+  strapi-frontend:
+    build:
+      context: ./frontend
+      dockerfile: dev.Dockerfile
+    volumes:
+      - ./frontend/src:/frontend/src
+      - ./frontend/public:/frontend/public
+    env_file:
+      - .env.local
+    depends_on:
+      - strapi
+
+  nginxxx:
+    container_name: nginxxx
+    image: nginx:1.27-alpine
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+      - media_strapi:/app/public/uploads
+    depends_on:
+      - strapi
+      - strapi-frontend
+    ports:
+      - "80:80"
+volumes:
+  pgdatastrapi:
+  media_strapi:
