@@ -8,7 +8,7 @@ services:
     networks:
       - buybuy_default
     volumes:
-      - media_strapi:/app/public/uploads
+      - tours_media_strapi:/app/public/uploads
 
   strapi-db:
     image: postgres:16-bookworm
@@ -30,7 +30,7 @@ services:
     
 volumes:
   pgdatastrapi:
-  media_strapi:
+  tours_media_strapi:
 
 networks:
   buybuy_default:
