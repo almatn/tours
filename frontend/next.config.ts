@@ -21,7 +21,7 @@ const nextConfig: NextConfig = {
             return [
                 {
                     source: '/uploads/:path*',
-                    destination: 'http://nginx/uploads/:path*',
+                    destination: 'http://strapi:1337/uploads/:path*',
                 },
             ];
         },
